@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于 Google Test（有时也称为gtest）的介绍，会分为两篇文章。本文主要介绍 google test 的相关知识，另外一篇则会演示一些示例程序。 1 Why googletest此处引用 google test 在 GitHub 上的介绍： googletest helps you write better C++ tests. googletest is a testing fram">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="关于 Google Test（有时也称为gtest）的介绍，会分为两篇文章。本文主要介绍 google test 的相关知识，另外一篇则会演示一些示例程序。 1 Why googletest此处引用 google test 在 GitHub 上的介绍： googletest helps you write better C++ tests. googletest is a testing fram">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-18T13:10:58.611Z">
+<meta property="article:modified_time" content="2020-10-07T12:31:23.388Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-googletest介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2020-10-18T13:10:58.611Z" itemprop="datePublished">2020-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于 Google Test（有时也称为gtest）的介绍，会分为两篇文章。本文主要介绍 google test 的相关知识，另外一篇则会演示一些示例程序。</p>
+<h1 id="1-Why-googletest"><a href="#1-Why-googletest" class="headerlink" title="1 Why googletest"></a>1 Why googletest</h1><p>此处引用 google test 在 GitHub 上的介绍：</p>
+<p>googletest helps you write better C++ tests.</p>
+<p>googletest is a testing framework developed by the Testing Technology team with Google’s specific requirements and constraints in mind. No matter whether you work on Linux, Windows, or a Mac, if you write C++ code, googletest can help you. And it supports any kind of tests, not just unit tests.</p>
+<h1 id="2-相关知识"><a href="#2-相关知识" class="headerlink" title="2 相关知识"></a>2 相关知识</h1><h2 id="2-1-Test、Test-Case-和-Test-Suite"><a href="#2-1-Test、Test-Case-和-Test-Suite" class="headerlink" title="2.1 Test、Test Case 和 Test Suite"></a>2.1 Test、Test Case 和 Test Suite</h2><p>此处介绍三个概念：<strong>Test</strong>、<strong>Test Case</strong> 和 <strong>Test Suite</strong>。</p>
+<p>这三者在某些场景下容易混淆。</p>
+<p>由于某些历史原因，googletest 使用 <strong>Test Case</strong> 来将相关的 <strong>Test</strong> 归为一组，然而，当前 ISTQB(International Software Testing Qualifications Board) 和很多关于软件质量书籍都使用 <strong>Test Suite</strong> 替换 <strong>Test Case</strong>；而 googletest 中的 <strong>Test</strong> 则对应 ISTQB 的 <strong>Test Case</strong>。总结后，即下表内容：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Meaning</th>
+<th align="left">googletest Term</th>
+<th align="left">ISTQB Term</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Exercise a particular program path with specific input values and verify the results</td>
+<td align="left">TEST()</td>
+<td align="left">Test Case</td>
+</tr>
+<tr>
+<td align="left">A set of several tests related to one component</td>
+<td align="left">Test Case</td>
+<td align="left">Test Suite</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-基本概念"><a href="#2-2-基本概念" class="headerlink" title="2.2 基本概念"></a>2.2 基本概念</h2><p>使用 googletest，最先写的就是<strong>断言（assertion）</strong>。断言是一种检查某个条件是否为真的描述。断言的结果可以是成功、非致命失败、致命失败。当致命失败发生时，当前函数将会终止；而断言的其他结果则不会有此效果。</p>
+<p><strong>Test</strong> 使用断言来判断测试代码的行为：如果一个 <strong>Test</strong> 崩溃了或者出现了一个失败的断言，则该 <strong>Test</strong> 就失败了；反之，它就是成功的。</p>
+<p><strong>Test case</strong> 包括一个或多个 <strong>Test</strong>。我们应当把 <strong>Test</strong> 打包、分组，放入 <strong>Test Case</strong> 中，以便测试代码的结构更加清晰。当一个 <strong>Test Case</strong> 中的多个 <strong>Test</strong> 需要共享对象和子程序时，我们可以把这些共享内容放入一个（test fixture）类中。</p>
+<p>一个测试程序可以包含多个 <strong>Test Case</strong>。</p>
+<h2 id="2-3-断言（assertion）"><a href="#2-3-断言（assertion）" class="headerlink" title="2.3 断言（assertion）"></a>2.3 断言（assertion）</h2><p>googletest 的断言是类似函数调用的宏。</p>
+<p>我们可以通过编写相关的断言，来测试类或函数的行为。如果断言失败了，googletest 将打印该断言的源文件及行号信息，以及该失败信息。我们也可以定制 googletest 的失败信息。</p>
+<p>当前，有两种断言可供我们使用：</p>
+<ul>
+<li>ASSERT_* ：当断言失败时，产生致命错误，并终止当前函数；</li>
+<li>EXPECT_* ：当断言失败时，产生非致命错误，并且不会终止当前函数。</li>
+</ul>
+<p>通常，我们都会选择 EXPECT_<em>，因为它能让我们在一次测试中测试出更多的失败情况。不过，如果我们想要在出现失败的测试时立即终止程序，则要选择 ASSERT_</em>。</p>
+<p><strong>注意：</strong>因为 ASSERT_* 会在失败时立即终止函数，那么就可能跳过后面程序中进行清理工作的代码，由此可能会产生内存泄露。所以我们在使用 ASSERT_* 时，要留心检查堆内存，防止内存泄露。</p>
+<p>一些常见的断言语句如下：</p>
+<p>【基本断言】：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Fatal assertion</th>
+<th align="left">Nonfatal assertion</th>
+<th align="left">Verifies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ASSERT_TRUE(condition);</code></td>
+<td align="left"><code>EXPECT_TRUE(condition);</code></td>
+<td align="left"><code>condition</code> is true</td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_FALSE(condition);</code></td>
+<td align="left"><code>EXPECT_FALSE(condition);</code></td>
+<td align="left"><code>condition</code> is false</td>
+</tr>
+</tbody></table>
+<p>【二元断言】：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Fatal assertion</th>
+<th align="left">Nonfatal assertion</th>
+<th align="left">Verifies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ASSERT_EQ(val1, val2);</code></td>
+<td align="left"><code>EXPECT_EQ(val1, val2);</code></td>
+<td align="left"><code>val1 == val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_NE(val1, val2);</code></td>
+<td align="left"><code>EXPECT_NE(val1, val2);</code></td>
+<td align="left"><code>val1 != val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_LT(val1, val2);</code></td>
+<td align="left"><code>EXPECT_LT(val1, val2);</code></td>
+<td align="left"><code>val1 &lt; val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_LE(val1, val2);</code></td>
+<td align="left"><code>EXPECT_LE(val1, val2);</code></td>
+<td align="left"><code>val1 &lt;= val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_GT(val1, val2);</code></td>
+<td align="left"><code>EXPECT_GT(val1, val2);</code></td>
+<td align="left"><code>val1 &gt; val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_GE(val1, val2);</code></td>
+<td align="left"><code>EXPECT_GE(val1, val2);</code></td>
+<td align="left"><code>val1 &gt;= val2</code></td>
+</tr>
+</tbody></table>
+<p>【字符串断言】：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Fatal assertion</th>
+<th align="left">Nonfatal assertion</th>
+<th align="left">Verifies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ASSERT_STREQ(str1, str2);</code></td>
+<td align="left"><code>EXPECT_STREQ(str1, str2);</code></td>
+<td align="left">the two C strings have the same content</td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_STRNE(str1, str2);</code></td>
+<td align="left"><code>EXPECT_STRNE(str1, str2);</code></td>
+<td align="left">the two C strings have different contents</td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_STRCASEEQ(str1, str2);</code></td>
+<td align="left"><code>EXPECT_STRCASEEQ(str1, str2);</code></td>
+<td align="left">the two C strings have the same content, ignoring case</td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_STRCASENE(str1, str2);</code></td>
+<td align="left"><code>EXPECT_STRCASENE(str1, str2);</code></td>
+<td align="left">the two C strings have different contents, ignoring case</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/" data-id="ckgf4quyl0000d0njf0vzfe0t" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/18/googletest%E7%94%A8%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/18/Hello-Hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello Hexo</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/10/18/%E5%AE%89%E8%A3%85%E6%97%A5%E8%AE%B0/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/ubuntu%E5%AE%89%E8%A3%85googletest/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/openssl/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/googletest%E7%94%A8%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

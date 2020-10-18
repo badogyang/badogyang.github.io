@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 TEST()宏TEST() 宏的第一个参数是 Test Case 的名称，第二个参数是（隶属于第一个Test Case参数的）Test 的名称。一个测试的完整名称包括 Test Case 名称及 Test 的名称，不同 Test Case 的 Test 名称可以相同。 googletest 根据 test case 对测试结果进行分组，所以一些相关的 test 应当放入同一个 test cas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2020/10/18/googletest%E7%94%A8%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 TEST()宏TEST() 宏的第一个参数是 Test Case 的名称，第二个参数是（隶属于第一个Test Case参数的）Test 的名称。一个测试的完整名称包括 Test Case 名称及 Test 的名称，不同 Test Case 的 Test 名称可以相同。 googletest 根据 test case 对测试结果进行分组，所以一些相关的 test 应当放入同一个 test cas">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190103200903403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpaXRkYXI=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190104085228894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpaXRkYXI=,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-10-18T13:10:58.701Z">
+<meta property="article:modified_time" content="2020-08-16T03:38:07.760Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190103200903403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpaXRkYXI=,size_16,color_FFFFFF,t_70">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-googletest用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/18/googletest%E7%94%A8%E6%B3%95/" class="article-date">
+  <time datetime="2020-10-18T13:10:58.701Z" itemprop="datePublished">2020-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-TEST-宏"><a href="#1-TEST-宏" class="headerlink" title="1 TEST()宏"></a>1 TEST()宏</h1><p>TEST() 宏的第一个参数是 <strong>Test Case</strong> 的名称，第二个参数是（隶属于第一个Test Case参数的）<strong>Test</strong> 的名称。一个测试的完整名称包括 <strong>Test Case</strong> 名称及 <strong>Test</strong> 的名称，不同 <strong>Test Case</strong> 的 <strong>Test</strong> 名称可以相同。</p>
+<p>googletest 根据 test case 对测试结果进行分组，所以一些相关的 test 应当放入同一个 test case 中。</p>
+<p>使用 <strong>TEST()</strong> 宏来编写一个测试程序，示例代码（gtest_test1.cpp）如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;gtest/gtest.h&quot;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 此函数用于判断入参是否为正整数：如果是，则返回0；否则，返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Positive</span><span class="params">(<span class="keyword">int</span> nNum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nNum &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 测试入参2是否为正整数</span></span><br><span class="line">TEST(PositiveTest, HandlesPositiveInput)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(Positive(<span class="number">2</span>), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 测试入参0是否为正整数</span></span><br><span class="line">TEST(PositiveTest, HandlesZeroInput)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(Positive(<span class="number">0</span>), <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 测试入参-2是否为正整数</span></span><br><span class="line">TEST(PositiveTest, HandlesNegativeInput)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(Positive(<span class="number">-2</span>), <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 分析gtest程序的命令行参数</span></span><br><span class="line">    testing::InitGoogleTest(&amp;argc, argv);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 调用RUN_ALL_TESTS()运行所有测试用例</span></span><br><span class="line">    <span class="comment">// main函数返回RUN_ALL_TESTS()的运行结果</span></span><br><span class="line">    <span class="keyword">return</span> RUN_ALL_TESTS();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，我们编写了三个 test，分别为：HandlesPositiveInput、HandlesZeroInput 和 HandlesNegativeInput，这三个 test 都属于同一个 test case（PositiveTest）。</p>
+<p>编译并执行上述代码，结果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190103200903403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpaXRkYXI=,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h1 id="2-TEST-F-宏"><a href="#2-TEST-F-宏" class="headerlink" title="2 TEST_F()宏"></a>2 TEST_F()宏</h1><p>当我们想让多个 test 使用同一套数据配置时，就需要用到 Test Fixtures 了。</p>
+<p>test fixtures 的用法相对复杂一些，创建 fixture 的具体方法如下：</p>
+<ol>
+<li>派生一个继承 ::testing::Test 的类，并将该类中的一些内容声明为 protected 类型，以便在子类中进行访问；</li>
+<li>根据实际情况，编写默认的构造函数或SetUp()函数，来为每个 test 准备所需内容；</li>
+<li>根据实际情况，编写默认的析构函数或TearDown()函数，来释放SetUp()中分配的资源；</li>
+<li>根据实际情况，定义 test 共享的子程序。</li>
+</ol>
+<p>当使用 fixture 时，我们使用 TEST_F() 宏代替 TEST() 宏，TEST_F() 允许我们在 test fixture 中访问对象和子程序。</p>
+<p><strong>注意：</strong>TEST_F() 的第一个参数（即 test case 的名称）必须是 test fixture 类的名字。</p>
+<p>对于 TEST_F() 定义的每个 test，googletest 将会在运行时创建一个新的 test fixture，并立即通过 SetUp() 对其进行初始化，然后运行 test，之后通过调用 TearDown() 进行数据清理，最后删除 test fixture。需要注意的是，同一个 test case 中不同的 test 具有不同的 test fixture 对象，并且 googletest 每次创建新的 test fixture 前都会先删除之前的 test fixture。多个 test 不会重用相同的 test fixture，某个 test 对 fixture 进行的修改对其他 test 无影响。</p>
+<p>使用 <strong>TEST_F()</strong> 宏来编写一个测试程序，示例代码（gtest_test2.cpp）如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;gtest/gtest.h&quot;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 定义测试类FooTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooTest</span>:</span> <span class="keyword">public</span> testing::Test &#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="comment">// Code here will be called immediately after the constructor (right before each test)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SetUp</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        m_nTarget = <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Code here will be called immediately after each test (right before the destructor)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">TearDown</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">IsLargeThan5</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp; nNum)</span></span>;</span><br><span class="line">    <span class="keyword">int</span> m_nTarget;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 判断入参是否大于5：如果是，则返回0；否则返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FooTest::IsLargeThan5</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp; nNum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nNum &gt; m_nTarget)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">TEST_F(FooTest, HandlesInput6)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(IsLargeThan5(<span class="number">6</span>), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">TEST_F(FooTest, HandlesInput5)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(IsLargeThan5(<span class="number">5</span>), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">TEST_F(FooTest, HandlesInput4)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(IsLargeThan5(<span class="number">4</span>), <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 分析gtest程序的命令行参数</span></span><br><span class="line">    ::testing::InitGoogleTest(&amp;argc, argv);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 调用RUN_ALL_TESTS()运行所有测试用例</span></span><br><span class="line">    <span class="comment">// main函数返回RUN_ALL_TESTS()的运行结果</span></span><br><span class="line">    <span class="keyword">return</span> RUN_ALL_TESTS();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，我们编写了三个 test，分别为：HandlesInput6、HandlesInput5 和 HandlesInput4，这三个 test 都属于同一个 test case（即 FooTest）。注意，这里的 test case（即 FooTest） 一定要是 test fixture 类。</p>
+<p>上述代码中的 test 运行时，主要会进行如下操作：</p>
+<ol>
+<li>googletest 构造一个 FooTest 类的对象（我们称之为 f1）；</li>
+<li>f1.SetUp() 函数对 f1 进行初始化；</li>
+<li>使用对象 f1，运行第一个 test（HandlesInput6）；</li>
+<li>f1.TearDown() 在 test 完成后，进行清理工作；</li>
+<li>对象 f1 被析构。</li>
+<li>上述5个步骤在另一个 FooTest 类的对象（如 f2）中重复，此次会运行 HandlesInput5。</li>
+</ol>
+<p>编译并执行上述代码，结果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190104085228894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpaXRkYXI=,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h1 id="3-调用-Test"><a href="#3-调用-Test" class="headerlink" title="3 调用 Test"></a>3 调用 Test</h1><p>在上面的代码示例中我们能够看到，调用 Test 的操作是通过 <strong>RUN_ALL_TESTS()</strong> 宏完成的。</p>
+<p>RUN_ALL_TESTS() 宏在所有 test 都成功时，返回0；否则返回1。需要注意的是，RUN_ALL_TESTS() 会运行所有关联的 test，这些 test 可以来自不同的 test case，甚至不同的源文件。</p>
+<p>当我们调用 RUN_ALL_TESTS() 宏的时候，会进行以下操作：</p>
+<ol>
+<li>保存所有 googletest flag 的状态；</li>
+<li>为第一个 test 创建一个 test fixture 对象；</li>
+<li>通过 SetUp() 对上一步创建的 test fixture 对象进行初始化；</li>
+<li>使用 test fixture 对象运行 test；</li>
+<li>通过 TearDown() 清理 fixture；</li>
+<li>删除 fixture；</li>
+<li>还原所有 googletest flag 的状态；</li>
+<li>为下一个 test 重复上述操作，直到所有的 test 执行完成。</li>
+</ol>
+<p>注意：main() 函数必须要返回 RUN_ALL_TESTS() 宏的结果。同时，RUN_ALL_TESTS() 只能运行一次，多次调用会与 googletest 的一些功能（如 thread-safe death tests）发生冲突。</p>
+<h1 id="4-编写main-函数"><a href="#4-编写main-函数" class="headerlink" title="4 编写main()函数"></a>4 编写main()函数</h1><p>编写 main() 函数时，要返回 RUN_ALL_TESTS() 宏的值。</p>
+<p><strong>main()</strong> 函数中的 <strong>::testing::InitGoogleTest()</strong> 函数将会解析命令行中的 googletest 参数，它允许用户通过多样的命令行参数来控制测试程序的行为（即定制命令行参数的功能）。需要注意的是，::testing::InitGoogleTest() 函数必须要在 RUN_ALL_TESTS() 之前调用，否则对应的 flag 可能不会被正常地初始化。</p>
+<h1 id="5-备注"><a href="#5-备注" class="headerlink" title="5 备注"></a>5 备注</h1><p>Google Test 是线程安全的，其线程安全特性要依赖 pthreads 库。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/18/googletest%E7%94%A8%E6%B3%95/" data-id="ckgf4quyw0002d0nj4mon5lwb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/10/18/openssl/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/10/18/%E5%AE%89%E8%A3%85%E6%97%A5%E8%AE%B0/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/ubuntu%E5%AE%89%E8%A3%85googletest/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/openssl/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/googletest%E7%94%A8%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

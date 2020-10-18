@@ -64,6 +64,350 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-安装日记/docker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/18/%E5%AE%89%E8%A3%85%E6%97%A5%E8%AE%B0/docker/" class="article-date">
+  <time datetime="2020-10-18T13:11:41.477Z" itemprop="datePublished">2020-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">262  sudo apt-get remove docker                docker-engine                docker.io</span><br><span class="line">263  sudo apt-get update</span><br><span class="line">264  sudo apt-get install     apt-transport-https     ca-certificates     curl     software-properties-common</span><br><span class="line">265  curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">266  sudo add-apt-repository     &quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \</span><br><span class="line">      $(lsb_release -cs) \</span><br><span class="line">     stable&quot;</span><br><span class="line">269  sudo apt-get update</span><br><span class="line">270  sudo apt-get install docker-ce</span><br><span class="line">271  sudo systemctl enable docker</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/18/%E5%AE%89%E8%A3%85%E6%97%A5%E8%AE%B0/docker/" data-id="ckgf4quyz0004d0nj3awwbe7c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ubuntu安装googletest" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/18/ubuntu%E5%AE%89%E8%A3%85googletest/" class="article-date">
+  <time datetime="2020-10-18T13:10:58.718Z" itemprop="datePublished">2020-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Jessica-jie/p/6704388.html">ubuntu 安装 google Gtest</a></p>
+<h1 id="1-安装源代码"><a href="#1-安装源代码" class="headerlink" title="1.安装源代码"></a>1.安装源代码</h1><p>在ubuntu的桌面上,右键选择打开终端,在终端中输入如下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libgtest-dev</span><br></pre></td></tr></table></figure>
+
+<p>下载源码后,apt将会在目录/usr/src/生成gtest文件夹来存放源码.</p>
+<h1 id="2-编译源代码"><a href="#2-编译源代码" class="headerlink" title="2. 编译源代码"></a>2. 编译源代码</h1><p>接着刚才的命令,我们继续再刚才打开的终端中输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd &#x2F;usr&#x2F;src&#x2F;gtest</span><br></pre></td></tr></table></figure>
+
+<p>来进入源码存放的地方,里面的文件很简单(使用ls查看),一个源码 文件夹,一个cmake文件夹和一个cmake的配置文件(CMakeLists.txt).</p>
+<p>继续输入命令编译:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir build$ cd build</span><br><span class="line">$ sudo cmake ..</span><br><span class="line">$ sudo make</span><br></pre></td></tr></table></figure>
+
+<p>等编译完成,就可以看到生成的库文件和一堆没有用的东西.</p>
+<h1 id="3-将编译生成好的库拷贝到系统目录下"><a href="#3-将编译生成好的库拷贝到系统目录下" class="headerlink" title="3.将编译生成好的库拷贝到系统目录下"></a>3.将编译生成好的库拷贝到系统目录下</h1><p>将生成的libgtest.a 和 libgtest_main.a 拷贝到系统的lib路径下.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp libgtest*.a &#x2F;usr&#x2F;lib</span><br></pre></td></tr></table></figure>
+
+<p>OK,google gtest的库全部安装好了!</p>
+<p>测试</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;gtest/gtest.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">TEST(testCase,test0)&#123;</span><br><span class="line">    EXPECT_EQ(add(<span class="number">2</span>,<span class="number">3</span>),<span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">  testing::InitGoogleTest(&amp;argc,argv);</span><br><span class="line">  <span class="keyword">return</span> RUN_ALL_TESTS();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<p>g++ test.cpp -lgtest -lpthread</p>
+<p>./a.out</p>
+<p>输出以下信息编译成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;] Running 1 test from 1 test case.</span><br><span class="line">[----------] Global test environment set-up.</span><br><span class="line">[----------] 1 test from testCase</span><br><span class="line">[ RUN      ] testCase.test0</span><br><span class="line">[       OK ] testCase.test0 (0 ms)</span><br><span class="line">[----------] 1 test from testCase (0 ms total)</span><br><span class="line"></span><br><span class="line">[----------] Global test environment tear-down</span><br><span class="line">[&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;] 1 test from 1 test case ran. (0 ms total)</span><br><span class="line">[  PASSED  ] 1 test.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/18/ubuntu%E5%AE%89%E8%A3%85googletest/" data-id="ckgf4quyx0003d0nj3y7og0yx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-openssl" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/18/openssl/" class="article-date">
+  <time datetime="2020-10-18T13:10:58.716Z" itemprop="datePublished">2020-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="生成openssl-自签证书"><a href="#生成openssl-自签证书" class="headerlink" title="生成openssl 自签证书"></a>生成openssl 自签证书</h1><p>安装openssl for windows 进入bin目录</p>
+<p>运行openssl 执行下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">genrsa -des3 -out server.key 1024</span><br><span class="line">req -new -key server.key -out server.csr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="openssl/1603022448741.png" alt="1603022448741"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/18/openssl/" data-id="ckgf4quyt0001d0nj6wq94kdj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-googletest用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/18/googletest%E7%94%A8%E6%B3%95/" class="article-date">
+  <time datetime="2020-10-18T13:10:58.701Z" itemprop="datePublished">2020-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-TEST-宏"><a href="#1-TEST-宏" class="headerlink" title="1 TEST()宏"></a>1 TEST()宏</h1><p>TEST() 宏的第一个参数是 <strong>Test Case</strong> 的名称，第二个参数是（隶属于第一个Test Case参数的）<strong>Test</strong> 的名称。一个测试的完整名称包括 <strong>Test Case</strong> 名称及 <strong>Test</strong> 的名称，不同 <strong>Test Case</strong> 的 <strong>Test</strong> 名称可以相同。</p>
+<p>googletest 根据 test case 对测试结果进行分组，所以一些相关的 test 应当放入同一个 test case 中。</p>
+<p>使用 <strong>TEST()</strong> 宏来编写一个测试程序，示例代码（gtest_test1.cpp）如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;gtest/gtest.h&quot;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 此函数用于判断入参是否为正整数：如果是，则返回0；否则，返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Positive</span><span class="params">(<span class="keyword">int</span> nNum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nNum &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 测试入参2是否为正整数</span></span><br><span class="line">TEST(PositiveTest, HandlesPositiveInput)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(Positive(<span class="number">2</span>), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 测试入参0是否为正整数</span></span><br><span class="line">TEST(PositiveTest, HandlesZeroInput)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(Positive(<span class="number">0</span>), <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 测试入参-2是否为正整数</span></span><br><span class="line">TEST(PositiveTest, HandlesNegativeInput)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(Positive(<span class="number">-2</span>), <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 分析gtest程序的命令行参数</span></span><br><span class="line">    testing::InitGoogleTest(&amp;argc, argv);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 调用RUN_ALL_TESTS()运行所有测试用例</span></span><br><span class="line">    <span class="comment">// main函数返回RUN_ALL_TESTS()的运行结果</span></span><br><span class="line">    <span class="keyword">return</span> RUN_ALL_TESTS();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，我们编写了三个 test，分别为：HandlesPositiveInput、HandlesZeroInput 和 HandlesNegativeInput，这三个 test 都属于同一个 test case（PositiveTest）。</p>
+<p>编译并执行上述代码，结果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190103200903403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpaXRkYXI=,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h1 id="2-TEST-F-宏"><a href="#2-TEST-F-宏" class="headerlink" title="2 TEST_F()宏"></a>2 TEST_F()宏</h1><p>当我们想让多个 test 使用同一套数据配置时，就需要用到 Test Fixtures 了。</p>
+<p>test fixtures 的用法相对复杂一些，创建 fixture 的具体方法如下：</p>
+<ol>
+<li>派生一个继承 ::testing::Test 的类，并将该类中的一些内容声明为 protected 类型，以便在子类中进行访问；</li>
+<li>根据实际情况，编写默认的构造函数或SetUp()函数，来为每个 test 准备所需内容；</li>
+<li>根据实际情况，编写默认的析构函数或TearDown()函数，来释放SetUp()中分配的资源；</li>
+<li>根据实际情况，定义 test 共享的子程序。</li>
+</ol>
+<p>当使用 fixture 时，我们使用 TEST_F() 宏代替 TEST() 宏，TEST_F() 允许我们在 test fixture 中访问对象和子程序。</p>
+<p><strong>注意：</strong>TEST_F() 的第一个参数（即 test case 的名称）必须是 test fixture 类的名字。</p>
+<p>对于 TEST_F() 定义的每个 test，googletest 将会在运行时创建一个新的 test fixture，并立即通过 SetUp() 对其进行初始化，然后运行 test，之后通过调用 TearDown() 进行数据清理，最后删除 test fixture。需要注意的是，同一个 test case 中不同的 test 具有不同的 test fixture 对象，并且 googletest 每次创建新的 test fixture 前都会先删除之前的 test fixture。多个 test 不会重用相同的 test fixture，某个 test 对 fixture 进行的修改对其他 test 无影响。</p>
+<p>使用 <strong>TEST_F()</strong> 宏来编写一个测试程序，示例代码（gtest_test2.cpp）如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;gtest/gtest.h&quot;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 定义测试类FooTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooTest</span>:</span> <span class="keyword">public</span> testing::Test &#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="comment">// Code here will be called immediately after the constructor (right before each test)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SetUp</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        m_nTarget = <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// Code here will be called immediately after each test (right before the destructor)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">TearDown</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">IsLargeThan5</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp; nNum)</span></span>;</span><br><span class="line">    <span class="keyword">int</span> m_nTarget;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 判断入参是否大于5：如果是，则返回0；否则返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FooTest::IsLargeThan5</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp; nNum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nNum &gt; m_nTarget)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">TEST_F(FooTest, HandlesInput6)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(IsLargeThan5(<span class="number">6</span>), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">TEST_F(FooTest, HandlesInput5)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(IsLargeThan5(<span class="number">5</span>), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">TEST_F(FooTest, HandlesInput4)</span><br><span class="line">&#123;</span><br><span class="line">    EXPECT_EQ(IsLargeThan5(<span class="number">4</span>), <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 分析gtest程序的命令行参数</span></span><br><span class="line">    ::testing::InitGoogleTest(&amp;argc, argv);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 调用RUN_ALL_TESTS()运行所有测试用例</span></span><br><span class="line">    <span class="comment">// main函数返回RUN_ALL_TESTS()的运行结果</span></span><br><span class="line">    <span class="keyword">return</span> RUN_ALL_TESTS();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，我们编写了三个 test，分别为：HandlesInput6、HandlesInput5 和 HandlesInput4，这三个 test 都属于同一个 test case（即 FooTest）。注意，这里的 test case（即 FooTest） 一定要是 test fixture 类。</p>
+<p>上述代码中的 test 运行时，主要会进行如下操作：</p>
+<ol>
+<li>googletest 构造一个 FooTest 类的对象（我们称之为 f1）；</li>
+<li>f1.SetUp() 函数对 f1 进行初始化；</li>
+<li>使用对象 f1，运行第一个 test（HandlesInput6）；</li>
+<li>f1.TearDown() 在 test 完成后，进行清理工作；</li>
+<li>对象 f1 被析构。</li>
+<li>上述5个步骤在另一个 FooTest 类的对象（如 f2）中重复，此次会运行 HandlesInput5。</li>
+</ol>
+<p>编译并执行上述代码，结果如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190104085228894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpaXRkYXI=,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h1 id="3-调用-Test"><a href="#3-调用-Test" class="headerlink" title="3 调用 Test"></a>3 调用 Test</h1><p>在上面的代码示例中我们能够看到，调用 Test 的操作是通过 <strong>RUN_ALL_TESTS()</strong> 宏完成的。</p>
+<p>RUN_ALL_TESTS() 宏在所有 test 都成功时，返回0；否则返回1。需要注意的是，RUN_ALL_TESTS() 会运行所有关联的 test，这些 test 可以来自不同的 test case，甚至不同的源文件。</p>
+<p>当我们调用 RUN_ALL_TESTS() 宏的时候，会进行以下操作：</p>
+<ol>
+<li>保存所有 googletest flag 的状态；</li>
+<li>为第一个 test 创建一个 test fixture 对象；</li>
+<li>通过 SetUp() 对上一步创建的 test fixture 对象进行初始化；</li>
+<li>使用 test fixture 对象运行 test；</li>
+<li>通过 TearDown() 清理 fixture；</li>
+<li>删除 fixture；</li>
+<li>还原所有 googletest flag 的状态；</li>
+<li>为下一个 test 重复上述操作，直到所有的 test 执行完成。</li>
+</ol>
+<p>注意：main() 函数必须要返回 RUN_ALL_TESTS() 宏的结果。同时，RUN_ALL_TESTS() 只能运行一次，多次调用会与 googletest 的一些功能（如 thread-safe death tests）发生冲突。</p>
+<h1 id="4-编写main-函数"><a href="#4-编写main-函数" class="headerlink" title="4 编写main()函数"></a>4 编写main()函数</h1><p>编写 main() 函数时，要返回 RUN_ALL_TESTS() 宏的值。</p>
+<p><strong>main()</strong> 函数中的 <strong>::testing::InitGoogleTest()</strong> 函数将会解析命令行中的 googletest 参数，它允许用户通过多样的命令行参数来控制测试程序的行为（即定制命令行参数的功能）。需要注意的是，::testing::InitGoogleTest() 函数必须要在 RUN_ALL_TESTS() 之前调用，否则对应的 flag 可能不会被正常地初始化。</p>
+<h1 id="5-备注"><a href="#5-备注" class="headerlink" title="5 备注"></a>5 备注</h1><p>Google Test 是线程安全的，其线程安全特性要依赖 pthreads 库。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/18/googletest%E7%94%A8%E6%B3%95/" data-id="ckgf4quyw0002d0nj4mon5lwb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-googletest介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2020-10-18T13:10:58.611Z" itemprop="datePublished">2020-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于 Google Test（有时也称为gtest）的介绍，会分为两篇文章。本文主要介绍 google test 的相关知识，另外一篇则会演示一些示例程序。</p>
+<h1 id="1-Why-googletest"><a href="#1-Why-googletest" class="headerlink" title="1 Why googletest"></a>1 Why googletest</h1><p>此处引用 google test 在 GitHub 上的介绍：</p>
+<p>googletest helps you write better C++ tests.</p>
+<p>googletest is a testing framework developed by the Testing Technology team with Google’s specific requirements and constraints in mind. No matter whether you work on Linux, Windows, or a Mac, if you write C++ code, googletest can help you. And it supports any kind of tests, not just unit tests.</p>
+<h1 id="2-相关知识"><a href="#2-相关知识" class="headerlink" title="2 相关知识"></a>2 相关知识</h1><h2 id="2-1-Test、Test-Case-和-Test-Suite"><a href="#2-1-Test、Test-Case-和-Test-Suite" class="headerlink" title="2.1 Test、Test Case 和 Test Suite"></a>2.1 Test、Test Case 和 Test Suite</h2><p>此处介绍三个概念：<strong>Test</strong>、<strong>Test Case</strong> 和 <strong>Test Suite</strong>。</p>
+<p>这三者在某些场景下容易混淆。</p>
+<p>由于某些历史原因，googletest 使用 <strong>Test Case</strong> 来将相关的 <strong>Test</strong> 归为一组，然而，当前 ISTQB(International Software Testing Qualifications Board) 和很多关于软件质量书籍都使用 <strong>Test Suite</strong> 替换 <strong>Test Case</strong>；而 googletest 中的 <strong>Test</strong> 则对应 ISTQB 的 <strong>Test Case</strong>。总结后，即下表内容：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Meaning</th>
+<th align="left">googletest Term</th>
+<th align="left">ISTQB Term</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Exercise a particular program path with specific input values and verify the results</td>
+<td align="left">TEST()</td>
+<td align="left">Test Case</td>
+</tr>
+<tr>
+<td align="left">A set of several tests related to one component</td>
+<td align="left">Test Case</td>
+<td align="left">Test Suite</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-基本概念"><a href="#2-2-基本概念" class="headerlink" title="2.2 基本概念"></a>2.2 基本概念</h2><p>使用 googletest，最先写的就是<strong>断言（assertion）</strong>。断言是一种检查某个条件是否为真的描述。断言的结果可以是成功、非致命失败、致命失败。当致命失败发生时，当前函数将会终止；而断言的其他结果则不会有此效果。</p>
+<p><strong>Test</strong> 使用断言来判断测试代码的行为：如果一个 <strong>Test</strong> 崩溃了或者出现了一个失败的断言，则该 <strong>Test</strong> 就失败了；反之，它就是成功的。</p>
+<p><strong>Test case</strong> 包括一个或多个 <strong>Test</strong>。我们应当把 <strong>Test</strong> 打包、分组，放入 <strong>Test Case</strong> 中，以便测试代码的结构更加清晰。当一个 <strong>Test Case</strong> 中的多个 <strong>Test</strong> 需要共享对象和子程序时，我们可以把这些共享内容放入一个（test fixture）类中。</p>
+<p>一个测试程序可以包含多个 <strong>Test Case</strong>。</p>
+<h2 id="2-3-断言（assertion）"><a href="#2-3-断言（assertion）" class="headerlink" title="2.3 断言（assertion）"></a>2.3 断言（assertion）</h2><p>googletest 的断言是类似函数调用的宏。</p>
+<p>我们可以通过编写相关的断言，来测试类或函数的行为。如果断言失败了，googletest 将打印该断言的源文件及行号信息，以及该失败信息。我们也可以定制 googletest 的失败信息。</p>
+<p>当前，有两种断言可供我们使用：</p>
+<ul>
+<li>ASSERT_* ：当断言失败时，产生致命错误，并终止当前函数；</li>
+<li>EXPECT_* ：当断言失败时，产生非致命错误，并且不会终止当前函数。</li>
+</ul>
+<p>通常，我们都会选择 EXPECT_<em>，因为它能让我们在一次测试中测试出更多的失败情况。不过，如果我们想要在出现失败的测试时立即终止程序，则要选择 ASSERT_</em>。</p>
+<p><strong>注意：</strong>因为 ASSERT_* 会在失败时立即终止函数，那么就可能跳过后面程序中进行清理工作的代码，由此可能会产生内存泄露。所以我们在使用 ASSERT_* 时，要留心检查堆内存，防止内存泄露。</p>
+<p>一些常见的断言语句如下：</p>
+<p>【基本断言】：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Fatal assertion</th>
+<th align="left">Nonfatal assertion</th>
+<th align="left">Verifies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ASSERT_TRUE(condition);</code></td>
+<td align="left"><code>EXPECT_TRUE(condition);</code></td>
+<td align="left"><code>condition</code> is true</td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_FALSE(condition);</code></td>
+<td align="left"><code>EXPECT_FALSE(condition);</code></td>
+<td align="left"><code>condition</code> is false</td>
+</tr>
+</tbody></table>
+<p>【二元断言】：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Fatal assertion</th>
+<th align="left">Nonfatal assertion</th>
+<th align="left">Verifies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ASSERT_EQ(val1, val2);</code></td>
+<td align="left"><code>EXPECT_EQ(val1, val2);</code></td>
+<td align="left"><code>val1 == val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_NE(val1, val2);</code></td>
+<td align="left"><code>EXPECT_NE(val1, val2);</code></td>
+<td align="left"><code>val1 != val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_LT(val1, val2);</code></td>
+<td align="left"><code>EXPECT_LT(val1, val2);</code></td>
+<td align="left"><code>val1 &lt; val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_LE(val1, val2);</code></td>
+<td align="left"><code>EXPECT_LE(val1, val2);</code></td>
+<td align="left"><code>val1 &lt;= val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_GT(val1, val2);</code></td>
+<td align="left"><code>EXPECT_GT(val1, val2);</code></td>
+<td align="left"><code>val1 &gt; val2</code></td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_GE(val1, val2);</code></td>
+<td align="left"><code>EXPECT_GE(val1, val2);</code></td>
+<td align="left"><code>val1 &gt;= val2</code></td>
+</tr>
+</tbody></table>
+<p>【字符串断言】：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Fatal assertion</th>
+<th align="left">Nonfatal assertion</th>
+<th align="left">Verifies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ASSERT_STREQ(str1, str2);</code></td>
+<td align="left"><code>EXPECT_STREQ(str1, str2);</code></td>
+<td align="left">the two C strings have the same content</td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_STRNE(str1, str2);</code></td>
+<td align="left"><code>EXPECT_STRNE(str1, str2);</code></td>
+<td align="left">the two C strings have different contents</td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_STRCASEEQ(str1, str2);</code></td>
+<td align="left"><code>EXPECT_STRCASEEQ(str1, str2);</code></td>
+<td align="left">the two C strings have the same content, ignoring case</td>
+</tr>
+<tr>
+<td align="left"><code>ASSERT_STRCASENE(str1, str2);</code></td>
+<td align="left"><code>EXPECT_STRCASENE(str1, str2);</code></td>
+<td align="left">the two C strings have different contents, ignoring case</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/" data-id="ckgf4quyl0000d0njf0vzfe0t" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Hello-Hexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/18/Hello-Hexo/" class="article-date">
@@ -180,11 +524,23 @@
       <ul>
         
           <li>
-            <a href="/2020/10/18/Hello-Hexo/">Hello Hexo</a>
+            <a href="/2020/10/18/%E5%AE%89%E8%A3%85%E6%97%A5%E8%AE%B0/docker/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2020/10/18/hello-world/">Hello World</a>
+            <a href="/2020/10/18/ubuntu%E5%AE%89%E8%A3%85googletest/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/openssl/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/googletest%E7%94%A8%E6%B3%95/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/10/18/googletest%E4%BB%8B%E7%BB%8D/">(no title)</a>
           </li>
         
       </ul>
